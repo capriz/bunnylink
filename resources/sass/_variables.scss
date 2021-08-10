@@ -1,0 +1,62 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+.dropdown-toggle::after {
+    border-top: 0 !important;
+    border-right: 0 !important;;
+    border-bottom: 0 !important;;
+    border-left: 0 !important;;
+}
+
+.btn:not(.btn-link){
+    border-radius: 2px !important;
+    box-shadow: 1px 1px 20px -10px #000 !important;
+}
+
+.btn-primary {
+    color: white !important;
+}
+
+.btn-secondary {
+    color: #fff !important;
+    background-color: #6c757dad !important;
+    border-color: #6c757d1f !important;
+}
+
+.modal-content {
+    border: 0px !important;
+    border-radius: .1rem !important;
+}
+
+.card {
+    border: 0px !important;
+    border-radius: 0.1rem !important;
+}
+
+.table > :not(:last-child) > :last-child > * {
+    border-bottom-color: #88888836 !important;
+}
+
+.ajs-button .ajs-ok{
+    background-color: aliceblue !important;
+    border: 0 !important;
+    border-radius: 2px !important;
+    box-shadow: 1px 1px 20px -10px #000 !important;
+}
