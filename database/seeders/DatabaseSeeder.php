@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             'org_id'  => $organization->id,
         ]);
 
+
         $bouncer->assign($user)->to($user_model);
 
         // Initialized Admin
@@ -49,6 +50,11 @@ class DatabaseSeeder extends Seeder
             'name'     => 'admin',
             'email'    => 'admin@site.com',
             'password' => Hash::make('password'),
+        ]);
+
+        Members::create([
+            'user_id' => $admin_model->id,
+            'org_id'  => $organization->id,
         ]);
 
         $admin = $bouncer->role()->firstOrCreate([
