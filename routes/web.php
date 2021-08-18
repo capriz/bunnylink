@@ -6,7 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SettingsPrivacyController;
 use App\Http\Controllers\Inventory\RabbitsController;
-
+use App\Http\Controllers\Inventory\BreedingController;
 Auth::routes();
 
 Route::group(['middleware' => ['web', 'auth']], function () {
@@ -17,6 +17,11 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::prefix('rabbits')->group(function () {
         Route::get('/', [RabbitsController::class, 'index'])->name('rabbits');
         Route::post('/table', [RabbitsController::class, 'table'])->name('rabbits.table');
+    });
+
+    Route::prefix('breeding')->group(function () {
+        Route::get('/', [BreedingController::class, 'index'])->name('breeding');
+        Route::post('/table', [BreedingController::class, 'table'])->name('breeding.table');
     });
 
     Route::prefix('users')->group(function () {

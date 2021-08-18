@@ -31,7 +31,7 @@ class CreateBreedingsTable extends Migration
             $table->integer('total_kits')->nullable();
             $table->integer('born_doe')->nullable();
             $table->integer('born_buck')->nullable();
-            $table->integer('buck')->nullable();
+            $table->text('notes')->nullable();
             $table->integer('inserted_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

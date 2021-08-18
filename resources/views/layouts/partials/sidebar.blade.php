@@ -26,7 +26,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('roles') }}">
+                        <a class="sidebar-link" href="{{ route('breeding') }}">
                             Breeding
                         </a>
                     </li>
