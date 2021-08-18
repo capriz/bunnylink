@@ -3,18 +3,35 @@
         <a class="sidebar-brand" style="text-decoration: unset;" href="{{ route('home') }}">
             <span class="align-middle">{{ env('APP_NAME') }}</span>
         </a>
-
         <ul class="sidebar-nav">
             <li class="sidebar-header">
                 Components
             </li>
-
             <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('home') }}">
-                    <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                    <i class="fas fa-chart-area"> </i> <span class="align-middle">Dashboard</span>
                 </a>
             </li>
-
+            <li class="sidebar-item">
+                <a href="#manage-users" data-bs-toggle="collapse"
+                   class="sidebar-link show collapsed" aria-expanded="false"
+                >
+                    <i class="fas fa-database"></i><span class="align-middle">Inventory</span>
+                </a>
+                <ul id="manage-users" class="sidebar-dropdown list-unstyled collapse"
+                    data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('roles') }}">
+                            Rabbits
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('roles') }}">
+                            Breeding
+                        </a>
+                    </li>
+                </ul>
+            </li>
             @can('manage-users')
                 <li class="sidebar-item">
                     <a href="#manage-users" data-bs-toggle="collapse"

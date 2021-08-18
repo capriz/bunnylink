@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Members;
 use Silber\Bouncer\Bouncer;
+use App\Models\Organization;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,15 +21,27 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         //Initialize Default User
-        $user_model = User::create([
+        $user_model   = User::create([
             'name'     => 'user',
             'email'    => 'renier.trenuela@gmail.com',
             'password' => Hash::make('password'),
         ]);
-        $user       = $bouncer->role()->firstOrCreate([
+        $user         = $bouncer->role()->firstOrCreate([
             'name'  => 'user',
             'title' => 'User',
         ]);
+        $organization = Organization::create([
+            'name'    => 'Rabbitry',
+            'address' => 'local',
+            'email'   => 'renier.trenuela@gmail.com',
+            'status'  => '1',
+        ]);
+
+        Members::create([
+            'user_id' => $user_model->id,
+            'org_id'  => $organization->id,
+        ]);
+
         $bouncer->assign($user)->to($user_model);
 
         // Initialized Admin
@@ -37,7 +51,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        $admin       = $bouncer->role()->firstOrCreate([
+        $admin = $bouncer->role()->firstOrCreate([
             'name'  => 'admin',
             'title' => 'Administrator',
         ]);
