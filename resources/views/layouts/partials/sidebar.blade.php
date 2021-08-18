@@ -21,7 +21,7 @@
                 <ul id="manage-users" class="sidebar-dropdown list-unstyled collapse"
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('roles') }}">
+                        <a class="sidebar-link" href="{{ route('rabbits') }}">
                             Rabbits
                         </a>
                     </li>

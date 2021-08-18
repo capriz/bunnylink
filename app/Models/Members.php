@@ -13,4 +13,9 @@ class Members extends Model
         'user_id',
         'org_id',
     ];
+
+    public static function getOrgID($userid)
+    {
+        return (new static())->where('user_id', $userid)->first()->org_id;
+    }
 }

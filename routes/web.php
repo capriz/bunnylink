@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SettingsPrivacyController;
+use App\Http\Controllers\Inventory\RabbitsController;
 
 Auth::routes();
 
@@ -12,6 +13,12 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('home');
     });
+
+    Route::prefix('rabbits')->group(function () {
+        Route::get('/', [RabbitsController::class, 'index'])->name('rabbits');
+        Route::post('/table', [RabbitsController::class, 'table'])->name('rabbits.table');
+    });
+
     Route::prefix('users')->group(function () {
         Route::get('/', [UsersController::class, 'index'])->name('users')->middleware(['can:users']);
         Route::post('/table', [UsersController::class, 'usersTable'])->name('users.table');
