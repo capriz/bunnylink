@@ -31,4 +31,29 @@ class Breeding extends Model
         'inserted_by',
         'updated_by',
     ];
+
+
+    public function idGenerator()
+    {
+        $year    = now()->format('y');
+        $no_tags = $this->select(['id', 'litter_no', 'org_id'])
+                        ->where('org_id', Members::getOrgID(auth()->id()))
+                        ->whereNull('litter_no')
+                        ->get()
+                        ->toArray();
+
+        $with_tags = $this->select(['id', 'litter_no'])
+                          ->where('org_id', Members::getOrgID(auth()->id()))
+                          ->where('litter_no', 'LIKE', "R-{$year}%")
+                          ->whereNotNull('litter_no')
+                          ->count();
+
+        foreach ($no_tags as $key => $value) {
+            $hold = substr(1000000 + $with_tags, 1);
+            $this->where('id', $value['id'])->update([
+                'litter_no' => "L-{$year}{$value['org_id']}{$hold}",
+            ]);
+            $with_tags++;
+        }
+    }
 }

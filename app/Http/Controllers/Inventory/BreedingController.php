@@ -17,13 +17,15 @@ class BreedingController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(Breeding $breeding)
     {
+        $breeding->idGenerator();
+
         inertia::setrootview('layouts/app');
 
         return inertia::render('Inventory/Breeding', [
             'data' => [
-                'rabbits_table_link' => route('rabbits.table'),
+                'breeding_table_link' => route('breeding.table'),
             ],
         ]);
     }
