@@ -32,6 +32,13 @@
                     </li>
                 </ul>
             </li>
+            @can('options')
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('options') }}">
+                        <i class="fas fa-cogs"> </i> <span class="align-middle">Options</span>
+                    </a>
+                </li>
+            @endcan
             @can('manage-users')
                 <li class="sidebar-item">
                     <a href="#manage-users" data-bs-toggle="collapse"

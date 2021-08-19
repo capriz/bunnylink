@@ -79,6 +79,14 @@ class DatabaseSeeder extends Seeder
             'name'  => 'roles',
             'title' => 'Roles',
         ]);
+
+        $bouncer->allow($admin)->to($roles);
+
+        $roles = $bouncer->ability()->firstOrCreate([
+            'name'  => 'options',
+            'title' => 'Options',
+        ]);
+
         $bouncer->allow($admin)->to($roles);
     }
 }

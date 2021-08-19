@@ -72,6 +72,10 @@
                                 <input class="form-check-input" type="checkbox" value="roles" v-model="overview.abilities">
                                 <label class="form-check-label">roles</label>
                             </div>
+                            <div class="form-check form-switch me-3">
+                                <input class="form-check-input" type="checkbox" value="options" v-model="overview.abilities">
+                                <label class="form-check-label">options</label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

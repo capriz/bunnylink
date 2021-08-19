@@ -7,6 +7,8 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SettingsPrivacyController;
 use App\Http\Controllers\Inventory\RabbitsController;
 use App\Http\Controllers\Inventory\BreedingController;
+use App\Http\Controllers\OptionsController;
+
 Auth::routes();
 
 Route::group(['middleware' => ['web', 'auth']], function () {
@@ -22,6 +24,16 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::prefix('breeding')->group(function () {
         Route::get('/', [BreedingController::class, 'index'])->name('breeding');
         Route::post('/table', [BreedingController::class, 'table'])->name('breeding.table');
+    });
+
+    Route::prefix('options')->group(function () {
+        Route::get('/', [OptionsController::class, 'index'])->name('options')->middleware(['can:options']);
+        Route::post('/breeds', [OptionsController::class, 'breeds'])->name('options.breeds');
+        Route::post('/add/breed', [OptionsController::class, 'addBreed'])->name('options.add.breed');
+        Route::post('/remove/breed', [OptionsController::class, 'removeBreed'])->name('options.remove.breed');
+        Route::post('/rabbit/statuses', [OptionsController::class, 'rabbitStatuses'])->name('options.rabbit.statuses');
+        Route::post('/rs/add', [OptionsController::class, 'addRabbitStatus'])->name('options.rs.add');
+        Route::post('/rs/remove', [OptionsController::class, 'removeRabbitStatus'])->name('options.rs.remove');
     });
 
     Route::prefix('users')->group(function () {
