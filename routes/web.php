@@ -8,6 +8,7 @@ use App\Http\Controllers\SettingsPrivacyController;
 use App\Http\Controllers\Inventory\RabbitsController;
 use App\Http\Controllers\Inventory\BreedingController;
 use App\Http\Controllers\OptionsController;
+use App\Http\Controllers\Inventory\RabbitFormController;
 
 Auth::routes();
 
@@ -19,6 +20,13 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::prefix('rabbits')->group(function () {
         Route::get('/', [RabbitsController::class, 'index'])->name('rabbits');
         Route::post('/table', [RabbitsController::class, 'table'])->name('rabbits.table');
+    });
+
+    Route::prefix('rabbitform')->group(function () {
+        Route::get('/', [RabbitFormController::class, 'index'])->name('rabbit.form');
+        Route::post('/find/litter', [RabbitFormController::class, 'findLitter'])->name('rabbit.litter');
+        Route::post('/store', [RabbitFormController::class, 'store'])->name('rabbit.store.litter');
+        Route::get('/edit/{id}', [RabbitFormController::class, 'index'])->name('rabbit.edit.litter');
     });
 
     Route::prefix('breeding')->group(function () {
@@ -34,6 +42,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::post('/rabbit/statuses', [OptionsController::class, 'rabbitStatuses'])->name('options.rabbit.statuses');
         Route::post('/rs/add', [OptionsController::class, 'addRabbitStatus'])->name('options.rs.add');
         Route::post('/rs/remove', [OptionsController::class, 'removeRabbitStatus'])->name('options.rs.remove');
+        Route::post('/cateogries', [OptionsController::class, 'categories'])->name('options.category');
+        Route::post('/add/category', [OptionsController::class, 'addCategory'])->name('options.add.category');
+        Route::post('/remove/category', [OptionsController::class, 'removeCategory'])->name('options.remove.category');
     });
 
     Route::prefix('users')->group(function () {

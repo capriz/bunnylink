@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Rabbit;
 use App\Models\Breeding;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,8 +26,8 @@ class BreedingFactory extends Factory
             'org_id'               => 1,
             'litter_no'            => null,
             'cage_no'              => $this->faker->numberBetween(1, 100),
-            'parent_doe'           => null,
-            'parent_buck'          => null,
+            'parent_doe'           => Rabbit::query()->where('gender', 'doe')->inRandomOrder()->first()->id,
+            'parent_buck'          => Rabbit::query()->where('gender', 'buck')->inRandomOrder()->first()->id,
             'date_bred'            => $this->faker->dateTimeBetween('-1 year', 'now'),
             'expected_kindle_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'kindle_date'          => $this->faker->dateTimeBetween('-1 year', 'now'),

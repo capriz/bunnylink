@@ -2,12 +2,19 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory;
 use App\Models\User;
+use App\Models\Breed;
+use App\Models\Rabbit;
 use App\Models\Members;
+use App\Models\Breeding;
+use App\Models\Category;
 use Silber\Bouncer\Bouncer;
 use App\Models\Organization;
+use App\Models\RabbitStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Database\Factories\RabbitFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,7 +48,6 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user_model->id,
             'org_id'  => $organization->id,
         ]);
-
 
         $bouncer->assign($user)->to($user_model);
 
@@ -88,5 +94,30 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $bouncer->allow($admin)->to($roles);
+
+        $status = ['breeder', 'kits', 'grow outs', 'sold', 'culled', 'died', 'for sale', 'retired', 'donated',];
+        foreach ($status as $value) {
+            RabbitStatus::create([
+                'name'  => $value,
+                'color' => Factory::create()->hexColor,
+            ]);
+        }
+
+        $breeds = ['amercan', 'angora', 'beige', 'belgian hare', 'californian', 'chinchillia', 'cinnamon'];
+        foreach ($breeds as $value) {
+            Breed::create([
+                'name'  => $value,
+            ]);
+        }
+
+        $categories = ['local', 'pure', 'f1', 'f2', 'f3', 'hybrid', 'upgraded'];
+        foreach ($categories as $value) {
+            Category::create([
+                'name'  => $value,
+            ]);
+        }
+
+        Rabbit::factory(20)->create();
+        Breeding::factory(20)->create();
     }
 }

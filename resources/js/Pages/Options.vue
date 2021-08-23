@@ -73,6 +73,33 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div class="col-auto">
+                                    <div class="d-flex flex-column">
+                                        <h3 class="mb-0">Categories</h3>
+                                        <div class="my-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control"
+                                                       aria-describedby="button-addon2" v-model="input_category">
+                                                <button class="btn btn-success text-white" type="button"
+                                                        @click="addCategory">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between "
+                                                v-for="item in categories">
+                                                {{ item.name }}
+                                                <button type="button" class="btn btn-sm btn-danger text-white"
+                                                        @click="removeCategory(item.id)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </li>
+                                            <li class="list-group-item" v-if="!rabbit_statuses.length">No Data Found
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,12 +116,14 @@
         data() {
             return {
                 input_breed: '',
+                input_category: '',
                 breeds: {},
                 input_rabbit_status: {
                     name: '',
                     color: '#fff',
                 },
-                rabbit_statuses: {}
+                rabbit_statuses: {},
+                categories: {}
             }
         },
         methods: {
@@ -143,12 +172,37 @@
                 axios.post(this.data.breed_remove_link, {'id': id})
                     .then(function (value) {
                         $this.getBreeds();
+                        $this.input_breed = '';
+                    });
+            },
+            getCategories() {
+                var $this = this;
+                axios.post(this.data.category_link)
+                    .then(function (value) {
+                        $this.categories = value.data;
+                    });
+            },
+            addCategory() {
+                var $this = this;
+                axios.post(this.data.category_add_link, {'category': $this.input_category})
+                    .then(function (value) {
+                        $this.getCategories();
+                        $this.input_category = '';
+                    });
+            },
+            removeCategory(id) {
+                var $this = this;
+                axios.post(this.data.category_remove_link, {'id': id})
+                    .then(function (value) {
+                        $this.getCategories();
+                        $this.input_category = '';
                     });
             }
         },
         mounted() {
             this.getBreeds();
             this.getRabbitStatuses();
+            this.getCategories();
         }
     }
 </script>

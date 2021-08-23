@@ -4,20 +4,12 @@ namespace App\Http\Controllers\Inventory;
 
 use Carbon\Carbon;
 use Inertia\Inertia;
-use App\Models\User;
 use App\Models\Rabbit;
-use Silber\Bouncer\Bouncer;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
-class rabbitscontroller extends controller
+class RabbitsController extends Controller
 {
-    /**
-     * display a listing of the resource.
-     *
-     * @return \inertia\response
-     */
     public function index(Rabbit $rabbit)
     {
         $rabbit->idGenerator();
@@ -27,17 +19,27 @@ class rabbitscontroller extends controller
         return inertia::render('Inventory/Rabbits', [
             'data' => [
                 'rabbits_table_link' => route('rabbits.table'),
+                'rabbits_form_link'  => route('rabbit.form'),
             ],
         ]);
     }
 
     public function table()
     {
-        return DataTables::of(Rabbit::all())->setTransformer(function ($data) {
-            $data               = collect($data)->toArray();
-            $data["created_at"] = Carbon::parse($data["created_at"])->format("F j, Y h:i:sA");
-            $data["updated_at"] = Carbon::parse($data["updated_at"])->format("F j, Y h:i:sA");
-            return $data;
-        })->make(true);
+        return DataTables::of(Rabbit::query()
+                                    ->selectRaw('rabbits.*, br.litter_no')
+                                    ->leftJoin('breedings as br', 'br.id', '=', 'rabbits.breeding_id')
+                                    ->with(['rabbitStatus'])
+                                    ->get())
+                         ->setTransformer(function ($data) {
+                             $data                        = collect($data)->toArray();
+                             $data['rabbits_update_link'] = route('rabbit.edit.litter', ['id' => $data['id']]);
+                             $data["created_at"]          = Carbon::parse($data["created_at"])->format("F j, Y");
+                             $data["updated_at"]          = Carbon::parse($data["updated_at"])->format("F j, Y");
+                             $data["dob"]                 = Carbon::parse($data["dob"])->format("F j, Y");
+
+                             return $data;
+                         })
+                         ->make(true);
     }
 }

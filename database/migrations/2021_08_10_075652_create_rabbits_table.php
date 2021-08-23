@@ -27,8 +27,8 @@ class CreateRabbitsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('status')->nullable();
             $table->string('home_breed')->nullable();
-            $table->string('litter_id')->nullable();
             $table->string('notes')->nullable();
+            $table->string('avatar')->nullable();
             $table->integer('inserted_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

@@ -23,8 +23,8 @@ class Rabbit extends Model
         'gender',
         'status',
         'home_breed',
-        'litter_id',
         'notes',
+        'avatar',
         'inserted_by',
         'updated_by',
     ];
@@ -45,11 +45,16 @@ class Rabbit extends Model
                           ->count();
 
         foreach ($no_tags as $key => $value) {
+            $with_tags++;
             $hold = substr(1000000 + $with_tags, 1);
             $this->where('id', $value['id'])->update([
                 'tag_id' => "R-{$year}{$value['org_id']}{$hold}",
             ]);
-            $with_tags++;
         }
+    }
+
+    public function rabbitStatus()
+    {
+        return $this->hasOne(RabbitStatus::class, 'name', 'status');
     }
 }

@@ -32,7 +32,6 @@ class Breeding extends Model
         'updated_by',
     ];
 
-
     public function idGenerator()
     {
         $year    = now()->format('y');
@@ -49,11 +48,21 @@ class Breeding extends Model
                           ->count();
 
         foreach ($no_tags as $key => $value) {
+            $with_tags++;
             $hold = substr(1000000 + $with_tags, 1);
             $this->where('id', $value['id'])->update([
                 'litter_no' => "L-{$year}{$value['org_id']}{$hold}",
             ]);
-            $with_tags++;
         }
+    }
+
+    public function sire()
+    {
+        return $this->hasOne(Rabbit::class, 'id', 'parent_buck');
+    }
+
+    public function dam()
+    {
+        return $this->hasOne(Rabbit::class, 'id', 'parent_doe');
     }
 }
