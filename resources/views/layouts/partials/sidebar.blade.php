@@ -35,7 +35,7 @@
             @can('options')
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('options') }}">
-                        <i class="fas fa-cogs"> </i> <span class="align-middle">Select Options</span>
+                        <i class="fas fa-cogs"> </i> <span class="align-middle">Options</span>
                     </a>
                 </li>
             @endcan
