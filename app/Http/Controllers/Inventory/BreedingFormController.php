@@ -18,7 +18,7 @@ class BreedingFormController extends Controller
         $breeding = [];
 
         if ($request->id) {
-            $breeding = Breeding::query()->where('id', $request->id)->first();
+            $breeding = Breeding::query()->where('id', decrypt($request->id))->first();
         }
 
         inertia::setrootview('layouts/app');

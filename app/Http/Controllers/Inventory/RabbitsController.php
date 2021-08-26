@@ -34,9 +34,9 @@ class RabbitsController extends Controller
                          ->setTransformer(function ($data) {
                              $data                        = collect($data)->toArray();
                              $data['rabbits_update_link'] = route('rabbit.edit.litter', ['id' => $data['id']]);
-                             $data["created_at"]          = Carbon::parse($data["created_at"])->format("F j, Y");
-                             $data["updated_at"]          = Carbon::parse($data["updated_at"])->format("F j, Y");
-                             $data["dob"]                 = Carbon::parse($data["dob"])->format("F j, Y");
+                             $data["created_at"]          = $this->parseDate($data["created_at"]);
+                             $data["updated_at"]          = $this->parseDate($data["updated_at"]);
+                             $data["dob"]                 = $this->parseDate($data["dob"]);
 
                              return $data;
                          })
