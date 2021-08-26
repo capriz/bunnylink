@@ -57,4 +57,20 @@ class Rabbit extends Model
     {
         return $this->hasOne(RabbitStatus::class, 'name', 'status');
     }
+
+    public function myDoes()
+    {
+        return $this->query()
+                     ->select(['id', 'tag_id'])
+                     ->where('gender', 'doe')
+                     ->where('org_id', Members::getOrgID(auth()->id()));
+    }
+
+    public function myBucks()
+    {
+        return $this->query()
+                     ->select(['id', 'tag_id'])
+                     ->where('gender', 'buck')
+                     ->where('org_id', Members::getOrgID(auth()->id()));
+    }
 }

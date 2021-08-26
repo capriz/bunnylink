@@ -81,6 +81,8 @@
                     {"data": "litter_no", "title": "Litter ID"},
                     {"data": "created_at", "title": "Created At"},
                     {"data": "notes", "title": "Notes"},
+                    {"data": "inserted_by", "title": "Inserted By"},
+                    {"data": "updated_by", "title": "Updated By"},
                 ],
                 drawCallback: function (settings) {
                     $('.btn-img').on('click', function () {

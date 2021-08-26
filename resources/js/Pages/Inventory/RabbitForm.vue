@@ -107,6 +107,10 @@
                                     </div>
                                     <div class="d-grid gap-2 mt-4">
                                         <button class="btn btn-success text-white" type="submit">Submit</button>
+                                        <button v-if="data.rabbit.length !== 0" @click="deleteConfirm"
+                                                class="btn btn-danger text-white"
+                                                type="button">Delete
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -143,6 +147,14 @@
             };
         },
         methods: {
+            deleteConfirm() {
+                let $this = this;
+                alertify.confirm('Confirm Title', 'Do you want to delete this?', function () {
+                    window.location = $this.data.rabbit_delete_link;
+                    }, function () {
+                        alertify.error('Cancel')
+                    });
+            },
             submit() {
                 this.form.post(this.data.rabbit_store_link, {
                     onSuccess: function (value) {

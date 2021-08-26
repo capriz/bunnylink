@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Breed;
 use App\Models\Rabbit;
 use App\Models\RabbitStatus;
@@ -39,8 +40,8 @@ class RabbitFactory extends Factory
             'status'      => RabbitStatus::inRandomOrder()->first()->name,
             'home_breed'  => $this->faker->randomElement([0, 1, 'unknown']),
             'notes'       => 'Seeder',
-            'inserted_by' => 1,
-            'updated_by'  => 1,
+            'inserted_by' => User::inRandomOrder()->first()->name,
+            'updated_by'  => '',
         ];
     }
 }

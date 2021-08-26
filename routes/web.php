@@ -9,6 +9,7 @@ use App\Http\Controllers\Inventory\RabbitsController;
 use App\Http\Controllers\Inventory\BreedingController;
 use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\Inventory\RabbitFormController;
+use App\Http\Controllers\Inventory\BreedingFormController;
 
 Auth::routes();
 
@@ -22,16 +23,24 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::post('/table', [RabbitsController::class, 'table'])->name('rabbits.table');
     });
 
-    Route::prefix('rabbitform')->group(function () {
+    Route::prefix('rabbit-form')->group(function () {
         Route::get('/', [RabbitFormController::class, 'index'])->name('rabbit.form');
         Route::post('/find/litter', [RabbitFormController::class, 'findLitter'])->name('rabbit.litter');
         Route::post('/store', [RabbitFormController::class, 'store'])->name('rabbit.store.litter');
         Route::get('/edit/{id}', [RabbitFormController::class, 'index'])->name('rabbit.edit.litter');
+        Route::get('/delete/{id}', [RabbitFormController::class, 'destroy'])->name('rabbit.form.delete');
     });
 
     Route::prefix('breeding')->group(function () {
         Route::get('/', [BreedingController::class, 'index'])->name('breeding');
         Route::post('/table', [BreedingController::class, 'table'])->name('breeding.table');
+    });
+
+    Route::prefix('breeding-form')->group(function () {
+        Route::get('/', [BreedingFormController::class, 'index'])->name('breeding.form');
+        Route::post('/store', [BreedingFormController::class, 'store'])->name('breeding.form.store');
+        Route::get('/edit/{id}', [BreedingFormController::class, 'index'])->name('breeding.form.edit');
+        Route::get('/delete/{id}', [BreedingFormController::class, 'destroy'])->name('breeding.form.delete');
     });
 
     Route::prefix('options')->group(function () {

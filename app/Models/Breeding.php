@@ -43,7 +43,7 @@ class Breeding extends Model
 
         $with_tags = $this->select(['id', 'litter_no'])
                           ->where('org_id', Members::getOrgID(auth()->id()))
-                          ->where('litter_no', 'LIKE', "R-{$year}%")
+                          ->where('litter_no', 'LIKE', "L-{$year}%")
                           ->whereNotNull('litter_no')
                           ->count();
 

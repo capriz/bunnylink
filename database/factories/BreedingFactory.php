@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Rabbit;
 use App\Models\Breeding;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -40,7 +41,7 @@ class BreedingFactory extends Factory
             'born_doe'             => 5,
             'born_buck'            => 5,
             'notes'                => 'Seeder',
-            'inserted_by'          => 1,
+            'inserted_by'          => User::inRandomOrder()->first()->name,
         ];
     }
 }
