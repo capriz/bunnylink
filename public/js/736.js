@@ -1,2 +1,2 @@
 (self.webpackChunk=self.webpackChunk||[]).push([[736],{4736:(e,r,c)=>{"use strict";c.r(r),c.d(r,{default:()=>s});var n=c(5166);const u={props:{user:Object},render:function(e,r,c,u,s,t){return(0,n.openBlock)(),(0,n.createBlock)("div",null," Hi! ")}},s=u}}]);
-//# sourceMappingURL=736.js.map?id=e0f67fcfb57c0029d19d
+//# sourceMappingURL=736.js.map?id=f5d2d919a007fbd6ad94

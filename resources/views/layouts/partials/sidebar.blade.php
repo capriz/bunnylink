@@ -13,12 +13,12 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#manage-users" data-bs-toggle="collapse"
+                <a href="#rabbits" data-bs-toggle="collapse"
                    class="sidebar-link show collapsed" aria-expanded="false"
                 >
                     <i class="fas fa-database"></i><span class="align-middle">Inventory</span>
                 </a>
-                <ul id="manage-users" class="sidebar-dropdown list-unstyled collapse"
+                <ul id="rabbits" class="sidebar-dropdown list-unstyled collapse"
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('rabbits') }}">
