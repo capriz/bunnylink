@@ -31,6 +31,7 @@ class CreateRabbitsTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('inserted_by')->nullable();
             $table->string('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

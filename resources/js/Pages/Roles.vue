@@ -1,96 +1,106 @@
 <template>
-    <div>
-        <div class="container-fluid p-0">
-            <h1 class="h3 mb-3">Roles and Abilities</h1>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            Roles Data Table
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    <button class="btn btn-primary" @click="showAddModal()">Add a Role</button>
+    <auth-layout>
+        <div>
+            <div class="container-fluid p-0">
+                <h1 class="h3 mb-3">Roles and Abilities</h1>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Roles Data Table
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <button class="btn btn-primary" @click="showAddModal()">Add a Role</button>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <table id="roles-table" class="table table-hover" style="width: 100%"></table>
+                                    </div>
                                 </div>
-                                <div class="col-12 mb-3">
-                                    <table id="roles-table" class="table table-hover" style="width: 100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Role Add Modal -->
+            <div id="role-add-modal" class="modal fade" tabindex="-1">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Role Modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column">
+                                <label>Role Name</label>
+                                <input type="text" class="form-control" v-model="role_name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success text-white" @click="saveRole">Save changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Role Edit Modal -->
+            <div id="role-edit-modal" class="modal fade" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Role Modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column">
+                                <label>Role Name</label>
+                                <input type="text" class="form-control" v-model="overview.name">
+                            </div>
+                            <h5 class="my-2">Manage Users</h5>
+                            <div class="d-flex flex-fill">
+                                <div class="form-check form-switch me-3">
+                                    <input class="form-check-input" type="checkbox" value="manage-users"
+                                           v-model="overview.abilities">
+                                    <label class="form-check-label">manage-users</label>
+                                </div>
+                                <div class="form-check form-switch me-3">
+                                    <input class="form-check-input" type="checkbox" value="users"
+                                           v-model="overview.abilities">
+                                    <label class="form-check-label">users</label>
+                                </div>
+                                <div class="form-check form-switch me-3">
+                                    <input class="form-check-input" type="checkbox" value="roles"
+                                           v-model="overview.abilities">
+                                    <label class="form-check-label">roles</label>
+                                </div>
+                                <div class="form-check form-switch me-3">
+                                    <input class="form-check-input" type="checkbox" value="options"
+                                           v-model="overview.abilities">
+                                    <label class="form-check-label">options</label>
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger text-white" @click="deleteRole">Delete</button>
+                            <button type="button" class="btn btn-info text-white" @click="editRole">Update</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Role Add Modal -->
-        <div id="role-add-modal" class="modal fade" tabindex="-1">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Role Modal</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="d-flex flex-column">
-                            <label>Role Name</label>
-                            <input type="text" class="form-control" v-model="role_name">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success text-white" @click="saveRole">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Role Edit Modal -->
-        <div id="role-edit-modal" class="modal fade" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Role Modal</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="d-flex flex-column">
-                            <label>Role Name</label>
-                            <input type="text" class="form-control" v-model="overview.name">
-                        </div>
-                        <h5 class="my-2">Manage Users</h5>
-                        <div class="d-flex flex-fill">
-                            <div class="form-check form-switch me-3">
-                                <input class="form-check-input" type="checkbox" value="manage-users" v-model="overview.abilities">
-                                <label class="form-check-label">manage-users</label>
-                            </div>
-                            <div class="form-check form-switch me-3">
-                                <input class="form-check-input" type="checkbox" value="users" v-model="overview.abilities">
-                                <label class="form-check-label">users</label>
-                            </div>
-                            <div class="form-check form-switch me-3">
-                                <input class="form-check-input" type="checkbox" value="roles" v-model="overview.abilities">
-                                <label class="form-check-label">roles</label>
-                            </div>
-                            <div class="form-check form-switch me-3">
-                                <input class="form-check-input" type="checkbox" value="options" v-model="overview.abilities">
-                                <label class="form-check-label">options</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger text-white" @click="deleteRole">Delete</button>
-                        <button type="button" class="btn btn-info text-white" @click="editRole">Update</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </auth-layout>
 </template>
 
 <script>
+    import AuthLayout from "./Layout/AuthLayout";
+
     export default {
+        components: {AuthLayout},
         props: {
             data: Object,
         },
@@ -192,7 +202,7 @@
                     url: $this.data.roles_table_link,
                     type: 'POST'
                 },
-                "order": [[ 0, "desc" ]],
+                "order": [[0, "desc"]],
                 "columns": [
                     {"data": "id", "title": "ID"},
                     {

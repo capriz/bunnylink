@@ -1,3 +1,5 @@
+import TotalDetailChart from "./Charts/TotalDetailChart";
+
 require('./bootstrap');
 
 import { createApp, h } from 'vue'
@@ -26,5 +28,5 @@ window.catchError = function(errors) {
     alertify.alert('Please fill necessary fields.', message, function () {
         alertify.error('Please try again.');
     });
-}
+};
 

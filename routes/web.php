@@ -1,5 +1,6 @@
 <?php
 
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
@@ -10,10 +11,15 @@ use App\Http\Controllers\Inventory\BreedingController;
 use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\Inventory\RabbitFormController;
 use App\Http\Controllers\Inventory\BreedingFormController;
+use App\Http\Controllers\DefaultController;
 
 Auth::routes();
 
 Route::group(['middleware' => ['web', 'auth']], function () {
+    Route::prefix('defaults')->group(function () {
+        Route::post('/', [DefaultController::class, 'index'])->name('defaults');
+    });
+
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('home');
     });
@@ -71,6 +77,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::post('/destroy', [RolesController::class, 'destroy'])->name('roles.delete');
         Route::post('/table', [RolesController::class, 'table'])->name('roles.table');
     });
+
     Route::prefix('settings-privacy')->group(function () {
         Route::get('/', [SettingsPrivacyController::class, 'index'])->name('settings-privacy');
         Route::post('/upload-photo', [SettingsPrivacyController::class, 'uploadPhoto'])->name('settings-privacy.up');

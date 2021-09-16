@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Inventory;
 
 use Inertia\Inertia;
 use App\Models\Breed;
+use Inertia\Response;
 use Illuminate\Http\Request;
 use App\Models\Rabbit;
 use App\Models\Members;
@@ -39,7 +40,7 @@ class RabbitFormController extends Controller
                 'litter_find_link'   => route('rabbit.litter'),
                 'rabbit_store_link'  => route('rabbit.store.litter'),
                 'rabbit'             => $rabbit,
-                'rabbit_delete_link'  => route('rabbit.form.delete', ['id' => $request->id]),
+                'rabbit_delete_link' => !isset($request->id) ?: route('rabbit.form.delete', ['id' => $request->id]),
             ],
         ]);
     }

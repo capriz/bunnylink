@@ -1,22 +1,24 @@
 <template>
-    <div>
-        <div class="container-fluid p-0">
-            <h1 class="h3 mb-3">Rabbits</h1>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            Rabbits Data Table
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <a :href="data.rabbits_form_link" class="btn btn-primary"><i
-                                        class="fas fa-plus"></i> Add a Rabbit</a>
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <table id="rabbits-table" class="table table-hover nowrap"
-                                           style="width: 100%"></table>
+    <auth-layout>
+        <div>
+            <div class="container-fluid p-0">
+                <h1 class="h3 mb-3">Rabbits</h1>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Rabbits Data Table
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 mt-3">
+                                        <a :href="data.rabbits_form_link" class="btn btn-primary"><i
+                                            class="fas fa-plus"></i> Add a Rabbit</a>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <table id="rabbits-table" class="table table-hover nowrap"
+                                               style="width: 100%"></table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -24,13 +26,14 @@
                 </div>
             </div>
         </div>
-
-    </div>
+    </auth-layout>
 </template>
 
 <script>
+    import AuthLayout from "../Layout/AuthLayout";
     export default {
         name: "Rabbits.vue",
+        components: {AuthLayout},
         props: ['data'],
         data() {
             return {dt: null,};

@@ -1,40 +1,41 @@
 <template>
-
-    <div>
-        <div class="container-fluid p-0">
-            <h1 class="h3 mb-3">Breeding</h1>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            Breeding Data Table
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-auto mt-2">
-                                    <a :href="data.breeding_form_link" class="btn btn-primary">
-                                        <i class="fas fa-plus"></i>
-                                        Add a Breeding
-                                    </a>
-                                </div>
-                                <div class="col-auto mt-3 d-flex flex-row my-auto">
-                                    <span>Legends:</span>
-                                    <span class="mx-2">
+    <auth-layout>
+        <div>
+            <div class="container-fluid p-0">
+                <h1 class="h3 mb-3">Breeding</h1>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Breeding Data Table
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-auto mt-2">
+                                        <a :href="data.breeding_form_link" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i>
+                                            Add a Breeding
+                                        </a>
+                                    </div>
+                                    <div class="col-auto mt-3 d-flex flex-row my-auto">
+                                        <span>Legends:</span>
+                                        <span class="mx-2">
                                         <i class="fas fa-square" style="color: green"></i> Pregnant
                                     </span>
-                                    <span class="mx-2">
+                                        <span class="mx-2">
                                         <i class="fas fa-square" style="color: #ff646c"></i> Due Date
                                     </span>
-                                    <span class="mx-2">
+                                        <span class="mx-2">
                                         <i class="fas fa-square" style="color: dodgerblue"></i> For Weaning
                                     </span>
-                                    <span class="mx-2">
+                                        <span class="mx-2">
                                         <i class="fas fa-square" style="color: sandybrown"></i> For Rebreeding
                                     </span>
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <table id="breeding-table" class="table table-hover nowrap"
-                                           style="width: 100%"></table>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <table id="breeding-table" class="table table-hover nowrap"
+                                               style="width: 100%"></table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -42,12 +43,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </auth-layout>
 </template>
 
 <script>
+    import AuthLayout from "../Layout/AuthLayout";
     export default {
         name: "Breeding",
+        components: {AuthLayout},
         props: ['data'],
         data() {
             return {dt: null,};

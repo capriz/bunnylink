@@ -12,7 +12,7 @@ class DashboardController extends Controller
         Inertia::setRootView('layouts/app');
 
         return Inertia::render('Dashboard', [
-            'data' => 'sample',
+            'data' => [],
         ]);
     }
 }
