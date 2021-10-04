@@ -12,11 +12,11 @@
                             <div class="card-body">
                                 <form @submit.prevent="submit">
                                     <div class="row">
-                                        <div class="col-lg-1 col-sm-2 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Cage No.</label>
                                             <input type="number" v-model="form.cage_no" class="form-control">
                                         </div>
-                                        <div class="col-lg-3 col-sm-3 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Parent Doe (Dam)</label>
                                             <select class="form-select" v-model="form.parent_doe"
                                                     :class="{ 'is-invalid' : errors.parent_doe}">
@@ -26,7 +26,7 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-3 col-sm-3 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Parent Buck (Sire)</label>
                                             <select class="form-select" v-model="form.parent_buck"
                                                     :class="{ 'is-invalid' : errors.parent_buck}">
@@ -36,52 +36,52 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Date Bred</label>
                                             <input type="date" v-model="form.date_bred" class="form-control">
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Date Expected Kindle</label>
                                             <input type="date" v-model="form.expected_kindle_date" class="form-control">
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Date Kindled</label>
                                             <input type="date" v-model="form.kindle_date" class="form-control">
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Date Weaning</label>
                                             <input type="date" v-model="form.weaning_date" class="form-control">
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Planned Rebreed Date</label>
                                             <input type="date" v-model="form.planned_rebreed_date" class="form-control">
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Is Rebreed?</label>
                                             <select v-model="form.isRebreed" class="form-select">
                                                 <option value="0">No</option>
                                                 <option value="1">Yes</option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Born Alive</label>
                                             <input type="number" v-model="form.born_alive" class="form-control"
                                                    @keyup="sumTotalKits()">
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Born Dead</label>
                                             <input type="number" v-model="form.born_dead" class="form-control"
                                                    @keyup="sumTotalKits()">
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Total Kits</label>
                                             <input type="number" v-model="form.total_kits" class="form-control" readonly>
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Born Doe</label>
                                             <input type="number" v-model="form.born_doe" class="form-control">
                                         </div>
-                                        <div class="col-lg-2 col-sm-4 mt-3">
+                                        <div class="col-lg-4 col-sm-4 mt-3">
                                             <label>Born Buck</label>
                                             <input type="number" v-model="form.born_buck" class="form-control">
                                         </div>

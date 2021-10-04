@@ -47,70 +47,85 @@
 </template>
 
 <script>
-    import AuthLayout from "../Layout/AuthLayout";
-    export default {
-        name: "Breeding",
-        components: {AuthLayout},
-        props: ['data'],
-        data() {
-            return {dt: null,};
-        },
-        mounted() {
-            let $this = this;
-            $this.dt = $('#breeding-table').DataTable({
-                scrollX: true,
-                serverSide: true,
-                ajax: {
-                    url: $this.data.breeding_table_link,
-                    type: 'POST'
+import AuthLayout from "../Layout/AuthLayout";
+
+export default {
+    name: "Breeding",
+    components: {AuthLayout},
+    props: ['data'],
+    data() {
+        return {dt: null,};
+    },
+    mounted() {
+        let $this = this;
+        $this.dt = $('#breeding-table').DataTable({
+            scrollX: true,
+            serverSide: true,
+            ajax: {
+                url: $this.data.breeding_table_link,
+                type: 'POST'
+            },
+            "order": [[0, "desc"]],
+            "columns": [
+                {
+                    "data": function (value) {
+                        let hold = '';
+                        hold += "<a href='" + value.breeding_edit_link + "' class='btn btn-link'>" + value.litter_no + "</a>";
+                        if (value.date_bred) {
+                            hold += '<i class="fas fa-square" style="color: green"></i>';
+                        }
+                        if (!value.is_due_date) {
+                            hold += '<i class="fas fa-square" style="color: #ff646c"></i>';
+                        }
+                        if (!value.is_weaning) {
+                            hold += '<i class="fas fa-square" style="color: dodgerblue"></i>';
+                        }
+                        if (!value.is_rebreeding) {
+                            hold += '<i class="fas fa-square" style="color: sandybrown"></i>';
+                        }
+
+                        return hold;
+                    }, "name": "litter_no", "title": "Litter No."
                 },
-                "order": [[0, "desc"]],
-                "columns": [
-                    {
-                        "data": function (value) {
-                            let hold = '';
-                            hold += "<a href='" + value.breeding_edit_link + "' class='btn btn-link'>" + value.litter_no + "</a>";
-                            if (value.date_bred) {
-                                hold += '<i class="fas fa-square" style="color: green"></i>';
-                            }
-                            if (!value.is_due_date) {
-                                hold += '<i class="fas fa-square" style="color: #ff646c"></i>';
-                            }
-                            if (!value.is_weaning) {
-                                hold += '<i class="fas fa-square" style="color: dodgerblue"></i>';
-                            }
-                            if(!value.is_rebreeding) {
-                                hold += '<i class="fas fa-square" style="color: sandybrown"></i>';
-                            }
-
-                            return hold;
-                        }, "name": "litter_no", "title": "Litter No."
-                    },
-                    {"data": "cage_no", "title": "Cage No."},
-                    {"data": "sire.tag_id", "title": "Sire"},
-                    {"data": "dam.tag_id", "title": "Dam"},
-                    {"data": "date_bred", "title": "Date Bred"},
-                    {"data": "expected_kindle_date", "title": "Expected Kindle Date"},
-                    {"data": "kindle_date", "title": "Kindle Date"},
-                    {"data": "weaning_date", "title": "Weaning Date"},
-                    {"data": "planned_rebreed_date", "title": "Planned Rebreed Date"},
-                    {"data": "isRebreed", "title": "Is Rebreed?"},
-                    {"data": "born_alive", "title": "Born Alive"},
-                    {"data": "born_dead", "title": "Born Dead"},
-                    {"data": "total_kits", "title": "Total Kits"},
-                    {"data": "born_doe", "title": "Born Does"},
-                    {"data": "born_buck", "title": "Born Buck"},
-                    {"data": "created_at", "title": "Created At"},
-                    {"data": "notes", "title": "Notes"},
-                    {"data": "inserted_by", "title": "Inserted By"},
-                    {"data": "updated_by", "title": "Updated By"},
-                ],
-                drawCallback: function (settings) {
-
+                {"data": "cage_no", "title": "Cage No."},
+                {"data": "sire.tag_id", "title": "Sire"},
+                {"data": "dam.tag_id", "title": "Dam"},
+                {"data": "date_bred", "title": "Date Bred"},
+                {"data": "expected_kindle_date", "title": "Expected Kindle Date"},
+                {"data": "kindle_date", "title": "Kindle Date"},
+                {"data": "weaning_date", "title": "Weaning Date"},
+                {"data": "planned_rebreed_date", "title": "Planned Rebreed Date"},
+                {"data": "isRebreed", "title": "Is Rebreed?"},
+                {"data": "born_alive", "title": "Born Alive"},
+                {"data": "born_dead", "title": "Born Dead"},
+                {"data": "total_kits", "title": "Total Kits"},
+                {"data": "born_doe", "title": "Born Does"},
+                {"data": "born_buck", "title": "Born Buck"},
+                {"data": "created_at", "title": "Created At"},
+                {"data": "notes", "title": "Notes"},
+                {"data": "inserted_by", "title": "Inserted By"},
+                {"data": "updated_by", "title": "Updated By"},
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.date_bred) {
+                    $(row).css({"background-color": "#beffbe"});
                 }
-            });
-        }
+                if (!data.is_due_date) {
+                    $(row).css({"background-color": "#ff646c"});
+                }
+                if (!data.is_weaning) {
+                    $(row).css({"background-color": "dodgerblue"});
+                }
+                if (!data.is_rebreeding) {
+                    $(row).css({"background-color": "sandybrown"});
+                }
+            },
+            drawCallback: function (settings) {
+
+            }
+        });
     }
+}
 </script>
 
 <style scoped>

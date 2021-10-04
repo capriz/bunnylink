@@ -12,7 +12,7 @@
                             <div class="card-body">
                                 <form @submit.prevent="submit">
                                     <div class="row">
-                                        <div class="col-lg-2 col-sm-2 mt-3">
+                                        <div class="col-lg-3 col-sm-3 mt-3">
                                             <label>Cage No.</label>
                                             <input type="number" v-model="form.cage_no" class="form-control">
                                         </div>
@@ -25,7 +25,7 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-3 col-sm-5 mt-3">
+                                        <div class="col-lg-3 col-sm-3 mt-3">
                                             <label>Category</label>
                                             <select class="form-select" v-model="form.category">
                                                 <option value="">-- Select Options --</option>
@@ -34,7 +34,7 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-3 col-md-5 mt-3">
+                                        <div class="col-lg-3 col-md-3 mt-3">
                                             <label>Breed</label>
                                             <select class="form-select" v-model="form.breed">
                                                 <option value="">-- Select Options --</option>
@@ -43,11 +43,11 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-3 col-md-4 mt-3">
+                                        <div class="col-lg-3 col-md-3 mt-3">
                                             <label>Color Of Rabbit</label>
                                             <input type="text" class="form-control" v-model="form.color">
                                         </div>
-                                        <div class="col-lg-3 col-md-4 mt-3">
+                                        <div class="col-lg-3 col-md-3 mt-3">
                                             <label>Type</label>
                                             <select class="form-select" v-model="form.type">
                                                 <option value="">-- Select Options --</option>
