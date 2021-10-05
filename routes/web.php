@@ -22,6 +22,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+        Route::get('/totals', [DashboardController::class, 'getTotals'])->name('home.totals');
     });
 
     Route::prefix('rabbits')->group(function () {
