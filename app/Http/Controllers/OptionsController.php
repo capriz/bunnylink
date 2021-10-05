@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Models\Breed;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Models\RabbitStatus;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OptionsController extends Controller
 {
+    /**
+     * Default controller for Options.
+     *
+     * @return \Inertia\Response
+     */
     public function index()
     {
         inertia::setrootview('layouts/app');
@@ -29,11 +34,21 @@ class OptionsController extends Controller
         ]);
     }
 
+    /**
+     * Fetch list of Breeds.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function breeds()
     {
         return Breed::query()->orderBy('name')->get();
     }
 
+    /**
+     * Create New Breed.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
     public function addBreed(Request $request)
     {
         Breed::create([
@@ -41,11 +56,21 @@ class OptionsController extends Controller
         ]);
     }
 
+    /**
+     * Delete Breed functionality.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
     public function removeBreed(Request $request)
     {
         Breed::destroy($request->id);
     }
 
+    /**
+     * Check Breed conditions.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function rabbitStatuses()
     {
         return RabbitStatus::query()->orderBy('name')->get();
