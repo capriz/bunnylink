@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Inertia\Inertia;
 use App\Models\User;
 use App\Models\Files;
+use Inertia\Response;
 use Silber\Bouncer\Bouncer;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -14,7 +15,7 @@ use App\Http\Requests\UsersStoreRequest;
 
 class UsersController extends Controller
 {
-    public function index(Bouncer $bouncer)
+    public function index(Bouncer $bouncer): Response
     {
         Inertia::setRootView('layouts/app');
 
@@ -42,7 +43,7 @@ class UsersController extends Controller
         })->make(true);
     }
 
-    public function update(Request $request, Bouncer $bouncer)
+    public function update(Request $request, Bouncer $bouncer): array
     {
         $user = User::find($request->id);
         $bouncer->retract($user->getRoles())->from($user);
@@ -52,14 +53,14 @@ class UsersController extends Controller
         return ['success' => true];
     }
 
-    public function store(UsersStoreRequest $request)
+    public function store(UsersStoreRequest $request): array
     {
         User::create(["name" => $request->name, "email" => $request->email, "password" => Hash::make($request->password),]);
 
         return ['success' => true];
     }
 
-    public function changePassword(Request $request)
+    public function changePassword(Request $request): array
     {
         $this->validate($request, [
             'password' => 'required|confirmed',
@@ -70,7 +71,7 @@ class UsersController extends Controller
         return ['success' => true];
     }
 
-    public function destroy(Request $request, Bouncer $bouncer)
+    public function destroy(Request $request, Bouncer $bouncer): array
     {
         $user = User::find($request->id);
         $bouncer->retract($user->getRoles())->from($user);
